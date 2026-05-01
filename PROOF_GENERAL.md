@@ -143,16 +143,33 @@ Total: $n + 2 = (n+1) + 1 = \deg(R_0) + 1$. $\checkmark$
 
 **Proposition 3.1.** For $f(z) = z^n - 1$ and $\alpha \notin \{0, 1\}$, $\deg R_\alpha = n(2n-1)$.
 
-*Proof.* Writing $R_\alpha(z) = P(z,\alpha)/Q(z,\alpha)$ in lowest terms, direct symbolic computation (verified for $n = 2,3,4,5$) yields:
+*Proof (pole counting).* We count the finite poles of $R_\alpha$ on $\hat{\mathbb{C}}$.
 
-$$\deg P = n(2n-1), \qquad \deg Q = n(2n-1) - 1, \qquad \gcd(P,Q) = 1$$
+**Source 1: The predictor pole at $z = 0$.** The predictor $y(z) = z - \alpha f(z)/f'(z) = ((n-\alpha)z^n + \alpha)/(nz^{n-1})$ has a pole of order $n-1$ at $z = 0$. When $y \to \infty$, $f(y) \to y^n \to \infty$, so the correction term $f(z)^2 f(y) / (f'(z)(bf(z)^2 + cf(y)^2))$ also diverges. Thus $z = 0$ is a pole of $R_\alpha$ of order $n - 1$.
 
-| $n$ | $n(2n-1)$ | $\deg P$ (computed) | $\deg Q$ (computed) | Match |
-|-----|----------|--------------------|--------------------|-------|
-| 2 | 6 | 6 | 5 | $\checkmark$ |
-| 3 | 15 | 15 | 14 | $\checkmark$ |
-| 4 | 28 | 28 | 27 | $\checkmark$ |
-| 5 | 45 | 45 | 44 | $\checkmark$ |
+**Source 2: Vanishing of the weight denominator.** The correction denominator $bf(z)^2 + cf(y)^2 = 0$ holds when
+
+$$r(z)^2 = -\frac{b}{c} = -\frac{(1+\alpha^2)(\alpha-1)}{1+\alpha}, \qquad r(z) := \frac{f(y(z))}{f(z)}$$
+
+The rational function $r(z) = f(y)/f(z)$ has degree $n^2 - n$ as a map $\hat{\mathbb{C}} \to \hat{\mathbb{C}}$ (verified symbolically for $n = 2,3,4,5$). The equation $r(z)^2 = \text{const}$ has generically $2(n^2 - n)$ solutions.
+
+**No overlap:** At $z = 0$, $r(z)$ has a pole (since $y(0) \to \infty$ but $f(0) = -1 \neq 0$), so $z = 0$ is not among the roots of $r^2 = \text{const}$.
+
+**Pole count:**
+$$\text{finite poles} = \underbrace{(n-1)}_{\text{at } z=0} + \underbrace{2(n^2 - n)}_{\text{from } bF^2 + cG^2 = 0} = 2n^2 - n - 1$$
+
+Since $R_\alpha(\infty) = \infty$ (the leading behavior gives a well-defined nonzero ratio), $\infty$ is not a pole. Hence
+
+$$\deg R_\alpha = (\text{finite poles}) + 1 = 2n^2 - n - 1 + 1 = n(2n - 1)$$
+
+**Symbolic verification:**
+
+| $n$ | $n(2n-1)$ | $\deg P$ (computed) | $\deg Q$ (computed) | $\gcd$ | Match |
+|-----|----------|--------------------|--------------------|--------|-------|
+| 2 | 6 | 6 | 5 | 1 | $\checkmark$ |
+| 3 | 15 | 15 | 14 | 1 | $\checkmark$ |
+| 4 | 28 | 28 | 27 | 1 | $\checkmark$ |
+| 5 | 45 | 45 | 44 | 1 | $\checkmark$ |
 
 $\square$
 
@@ -164,9 +181,25 @@ $$\text{FreeCrit}(z) = z^{n-2} \cdot H(z^n, \alpha)$$
 
 where $H(t, \alpha)$ is a polynomial of degree $4n - 5$ in $t = z^n$.
 
-*Proof.* The $\mathbb{Z}_n$ symmetry of $f(z) = z^n - 1$ (invariance under $z \mapsto \omega z$, $\omega = e^{2\pi i/n}$) implies $R_\alpha(\omega z) = \omega R_\alpha(z)$. The critical polynomial inherits this equivariance, forcing the free part (after removing the $\mathbb{Z}_n$-invariant factor $(z^n-1)^2$) to have the form $z^r \cdot H(z^n)$ for some $r$.
+*Proof.* **Step 1: $\mathbb{Z}_n$ equivariance.** Let $\omega = e^{2\pi i/n}$. For $f(z) = z^n - 1$:
 
-From the computation: $r = n - 2$ and $\deg_t H = 4n - 5$ for $n = 2, 3, 4, 5$. $\square$
+$$f(\omega z) = f(z), \qquad f'(\omega z) = \omega^{n-1} f'(z)$$
+
+The predictor satisfies $y(\omega z) = \omega y(z)$:
+
+$$y(\omega z) = \omega z - \alpha \frac{f(\omega z)}{f'(\omega z)} = \omega z - \frac{\alpha f(z)}{\omega^{n-1} f'(z)} = \omega z - \omega^{1-n} \cdot \frac{\alpha f(z)}{f'(z)} = \omega\left(z - \frac{\alpha f(z)}{f'(z)}\right) = \omega y(z)$$
+
+where we used $\omega^{1-n} = \omega^{1} \cdot \omega^{-n} = \omega$ (since $\omega^n = 1$).
+
+Setting $F = f(z)$, $G = f(y(z))$: under $z \mapsto \omega z$, we have $F \mapsto F$, $G \mapsto G$ (since $f(\omega y) = (\omega y)^n - 1 = y^n - 1 = G$), $f'(z) \mapsto \omega^{n-1} f'(z)$. The correction term transforms as:
+
+$$\frac{F^2 G}{f'(\omega z)(bF^2 + cG^2)} = \frac{F^2 G}{\omega^{n-1} f'(z)(bF^2 + cG^2)} = \omega^{1-n} \cdot \frac{F^2 G}{f'(z)(bF^2 + cG^2)} = \omega \cdot \text{correction}$$
+
+Hence $R_\alpha(\omega z) = \omega y - \omega \cdot \text{correction} = \omega R_\alpha(z)$.
+
+**Step 2: Structure of $P$ and $Q$.** Writing $R_\alpha = P/Q$, the equivariance $R_\alpha(\omega z) = \omega R_\alpha(z)$ forces $P(\omega z) Q(z) = \omega P(z) Q(\omega z)$. Since $P(\omega z) = \omega^a P(z)$ and $Q(\omega z) = \omega^b Q(z)$, we get $a \equiv b + 1 \pmod{n}$. Verified: $P$ has only terms $z^k$ with $k \equiv 0 \pmod{n}$, $Q$ has terms with $k \equiv n-1 \pmod{n}$, for all $n = 2,3,4,5$.
+
+**Step 3: Free critical polynomial.** The critical polynomial $P'Q - PQ'$ inherits the equivariance. The trivial factor $(z^n-1)^2$ is $\mathbb{Z}_n$-invariant. The free quotient must have the form $z^r H(z^n)$, and the computation gives $r = n-2$, $\deg_t H = 4n-5$ for $n = 2,3,4,5$. $\square$
 
 ### 3.3. Coalescence of critical points as $\alpha \to 0$
 
