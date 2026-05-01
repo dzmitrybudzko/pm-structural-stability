@@ -10,11 +10,11 @@ a rational map of degree 4 on $\hat{\mathbb{C}}$. All critical points of $R_0$ a
 
 **(b)** For $\alpha \neq 0$, $R_\alpha$ is a rational map of degree 15 with 28 critical points (counted with multiplicity). The roots of $f$ account for 6 (trivial). The remaining 22 free critical points form a polynomial $z \cdot H(z^3, \alpha)$ where $H$ is degree 7 in $t = z^3$, reflecting the $\mathbb{Z}_3$ symmetry, and they organize into 7 orbits under $z \mapsto \omega z$.
 
-**(c)** There exists $\alpha^* > 0$ (numerically $\alpha^* \approx 0.8372$) such that for all $\alpha \in (-\infty, 0) \cup (0, \alpha^*)$, every free critical orbit of $R_\alpha$ converges to a root of $f$. Consequently, $R_\alpha$ is hyperbolic and J-stable in this parameter region.
+**(c)** Numerical computation and a heuristic analytical argument provide strong evidence that there exists $\alpha^* > 0$ (numerically $\alpha^* \approx 0.8372$) such that for all $\alpha \in (-\infty, 0) \cup (0, \alpha^*)$, every free critical orbit of $R_\alpha$ converges to a root of $f$. If this holds, then $R_\alpha$ is hyperbolic and J-stable in this parameter region (by MSS), and $\dim_H J(R_\alpha) < 2$ (by Ruelle).
 
-**(d)** At $\alpha = \alpha^*$, a bifurcation occurs: the fixed point $\infty$ transitions from repelling ($|\lambda_\infty| > 1$) to attracting ($|\lambda_\infty| < 1$), capturing free critical orbits and breaking hyperbolicity.
+**(d)** Numerical evidence indicates that at $\alpha = \alpha^*$, the multiplier $|\lambda_\infty(\alpha)|$ crosses 1 and the fixed point $\infty$ transitions from repelling to attracting, capturing free critical orbits. The bifurcation type is not determined.
 
-**(e)** For $\alpha$ in the J-stable region, $\dim_H J(R_\alpha) < 2$, whereas $\dim_H J(N_f) = 2$ for Newton's method on $z^3 - 1$ (Shishikura, 1990).
+**(e)** For Newton's method on $z^3 - 1$, $\dim_H J(N_f) = 2$ (Shishikura, 1990). Conditional on the hyperbolicity of part (c), the PM scheme avoids this pathology: $\dim_H J(R_\alpha) < 2$.
 
 ---
 
@@ -123,9 +123,9 @@ This is the **mechanism of degree reduction**: the 21 free critical points colli
 
 ### Part 7. Convergence of Free Critical Orbits
 
-**Proposition 7.1.** For $\alpha$ in the J-stable region $((-\infty, 0) \cup (0, \alpha^*))$, all free critical orbits of $R_\alpha$ converge to roots of $f$.
+**Observation 7.1** (numerical). For all tested $\alpha \in (0, \alpha^*)$, every free critical orbit of $R_\alpha$ converges to a root of $f$.
 
-*Proof strategy (analytical, for small $|\alpha|$):*
+*Heuristic argument (analytical, for small $|\alpha|$):*
 
 1. **Critical points near $z = 0$.** By Corollary 6.3, the free critical points satisfy $|z_c| = O(|\alpha|^{k})$ for some $k > 0$.
 
@@ -135,11 +135,11 @@ This is the **mechanism of degree reduction**: the 21 free critical points colli
 $$R_\alpha(z) \approx \frac{p_{15}(\alpha)}{q_{14}(\alpha)} z$$
 where $p_{15}/q_{14} \approx 1/2$ for small $\alpha$ (computed from leading coefficients, approaching the $R_0$ value). Since $|p_{15}/q_{14}| < 1$, the iterate contracts toward the origin.
 
-4. **Convergence in the moderate region.** After $O(\log(1/|\alpha|))$ iterates, the orbit reaches a bounded region $\{|z| \leq M\}$. On this region, $R_\alpha \to R_0$ uniformly as $\alpha \to 0$ (away from the poles $z^3 = -1/2$). Since the Fatou set of $R_0$ covers all of $\hat{\mathbb{C}}$ except $J(R_0)$ (a set of measure zero), the orbit is in a basin of $R_0$ and converges to a root. For small $\alpha$, $R_\alpha$ is a small perturbation of $R_0$, so convergence persists.
+4. **Gap: moderate-region convergence.** After $O(\log(1/|\alpha|))$ iterates, the orbit reaches a bounded region $\{|z| \leq M\}$. One then needs: (i) $R_\alpha \to R_0$ uniformly on compact subsets away from poles, and (ii) orbits landing in the Fatou set of $R_0$ remain in the Fatou set of $R_\alpha$. Point (ii) does not follow from pointwise closeness alone — it requires either a trapping region argument or an appeal to structural stability (MSS). Since the degree jumps at $\alpha = 0$, standard MSS does not apply directly; this step remains a gap.
 
-*Proof (computer-assisted, for explicit $\alpha$ values):*
+*Numerical evidence (computer-assisted, for explicit $\alpha$ values):*
 
-Complete enumeration of all 28 critical points (via polynomial root-finding on the degree-28 critical polynomial with numerical $\alpha$-substitution), followed by orbit iteration, confirms convergence to roots for all tested $\alpha$:
+Complete enumeration of all 28 critical points (via polynomial root-finding on the degree-28 critical polynomial with numerical $\alpha$-substitution), followed by orbit iteration (computed numerically, floating-point):
 
 | $\alpha$ | Free CPs | Z₃ orbits | All converge? |
 |---|---|---|---|
@@ -156,7 +156,7 @@ Complete enumeration of all 28 critical points (via polynomial root-finding on t
 | $-2.0$ | — | — | **Yes** |
 | 0.9 | 21 | 7 | **No** (2 orbits to $\infty$) |
 
-This establishes hyperbolicity for $\alpha \in (-\infty, 0) \cup (0, 0.837)$. $\square$
+This provides strong numerical evidence for hyperbolicity of $R_\alpha$ for $\alpha \in (-\infty, 0) \cup (0, 0.837)$, but is not a rigorous proof.
 
 ### Part 8. The Bifurcation at $\alpha^*$
 
@@ -177,16 +177,16 @@ This is computed from the leading coefficients of $P$ and $Q$ via the conjugatio
 | **0.837** | **~1** | **~1** | **Neutral** |
 | 0.9 | 1.135 | 0.881 | Attracting |
 
-At $\alpha = \alpha^* \approx 0.8372$, $|\lambda_\infty| = 1$, and $\infty$ undergoes a bifurcation from repelling to attracting. By Fatou's theorem, the newly attracting fixed point at $\infty$ must capture at least one critical orbit, removing it from the root basins and breaking hyperbolicity. $\square$
+At $\alpha = \alpha^* \approx 0.8372$, $|\lambda_\infty| = 1$, and the numerical data indicates $\infty$ transitions from repelling to attracting. If $\infty$ becomes attracting, then by Fatou's theorem it must capture at least one critical orbit, removing it from the root basins and breaking hyperbolicity. The type of bifurcation (saddle-node, period-doubling, etc.) is not determined — this would require a normal form analysis.
 
 ### Part 9. Application of the Mañé–Sad–Sullivan Theorem
 
 **Theorem (MSS, 1983).** A holomorphic family of rational maps $\{R_\lambda\}$ is J-stable at $\lambda_0$ if and only if no critical point lies on $J(R_{\lambda_0})$.
 
-**Corollary 9.1.** By Proposition 7.1, for $\alpha \in (-\infty, 0) \cup (0, \alpha^*)$:
+**Corollary 9.1** (conditional). If for some $\alpha_0$ every critical orbit of $R_{\alpha_0}$ converges to an attracting cycle (as indicated by the numerical evidence in Part 7), then:
 - All critical points are in the Fatou set (attracted to superattracting fixed points).
-- By MSS, $R_\alpha$ is J-stable: $J(R_\alpha)$ varies continuously in the Hausdorff metric.
-- $R_\alpha$ is hyperbolic (expanding on $J$), so $\dim_H J(R_\alpha) < 2$.
+- By MSS, $R_{\alpha_0}$ is J-stable: $J(R_{\alpha_0})$ varies continuously in the Hausdorff metric.
+- $R_{\alpha_0}$ is hyperbolic (expanding on $J$), so $\dim_H J(R_{\alpha_0}) < 2$.
 
 **Corollary 9.2.** For Newton's method $N_f(z) = (2z^3 + 1)/(3z^2)$ on $z^3 - 1$:
 - The free critical point $z = 0$ maps to $\infty$ (a repelling fixed point on $J(N_f)$).
@@ -197,13 +197,13 @@ At $\alpha = \alpha^* \approx 0.8372$, $|\lambda_\infty| = 1$, and $\infty$ unde
 
 The PM family interpolates between two regimes:
 
-1. **$\alpha \to 0$ (PM limit):** $R_\alpha \to R_0$, degree 4, no free critical points, hyperbolic, $\dim_H J < 2$.
+1. **$\alpha \to 0$ (PM limit):** $R_\alpha \to R_0$, degree 4, no free critical points, hyperbolic, $\dim_H J < 2$. (Proved.)
 
-2. **$\alpha \to 1$ (Newton limit):** $R_\alpha \to N_f$, degree 3, free critical point at $z = 0$ on $J$, $\dim_H J = 2$.
+2. **$\alpha \to 1$ (Newton limit):** $R_\alpha \to N_f$, degree 3, free critical point at $z = 0$ on $J$, $\dim_H J = 2$. (Shishikura, 1990.)
 
-The transition occurs at $\alpha^* \approx 0.837$, where the fixed point at $\infty$ changes stability, capturing critical orbits.
+The transition occurs at $\alpha^* \approx 0.837$ (numerical), where the fixed point at $\infty$ changes stability, capturing critical orbits.
 
-This proves that the PM scheme with small $|\alpha|$ produces **structurally stable dynamics** with basin boundaries of reduced Hausdorff dimension, in contrast to Newton's method. $\blacksquare$
+The numerical evidence and heuristic argument provide strong support that the PM scheme with small $|\alpha|$ produces **structurally stable dynamics** with basin boundaries of reduced Hausdorff dimension, in contrast to Newton's method. A complete proof requires rigorous verification of critical orbit convergence for $\alpha \in (0, \alpha^*)$. $\blacksquare$
 
 ---
 
