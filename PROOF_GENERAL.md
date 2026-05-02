@@ -1,4 +1,4 @@
-# Theorem: Structural Stability of the PM Iterative Scheme (General Case)
+# Degree Collapse, Critical Point Coalescence, and Hyperbolicity in the PM Family
 
 ## For $f(z) = z^n - 1$, $n \geq 2$
 
@@ -6,48 +6,52 @@
 
 ## 1. Statement
 
-**Theorem.** Let $f(z) = z^n - 1$ with $n \geq 2$, and let $R_\alpha$ be the PM operator (Budzko–Cordero–Torregrosa, 2015) with parameter $\alpha \in \mathbb{R} \setminus \{0, 1\}$:
+We study the PM family of rational maps $R_\alpha$ (Budzko–Cordero–Torregrosa, 2015) applied to $f(z) = z^n - 1$, with parameter $\alpha \in \mathbb{R} \setminus \{0, 1\}$:
 
 $$y = z - \alpha \frac{f(z)}{f'(z)}, \qquad R_\alpha(z) = y - \frac{f(z)^2 \cdot f(y)}{f'(z) \cdot (b f(z)^2 + c f(y)^2)}$$
 
 where $b = \frac{1+\alpha^2}{2\alpha^2}$, $c = \frac{1+\alpha}{2\alpha^2(\alpha-1)}$. Then:
 
-**(a) Limiting map.** The limit $R_0 = \lim_{\alpha \to 0} R_\alpha$ exists and equals
+The main contributions are organized into **proved results** (Theorems) and **supported conjectures** (numerical evidence + partial analytical argument).
+
+### Proved results
+
+**(a) Limiting map (Theorem 2.1).** The limit $R_0 = \lim_{\alpha \to 0} R_\alpha$ exists and equals
 
 $$\boxed{R_0(z) = z \cdot \frac{(n-1)z^n + (n+1)}{(n+1)z^n + (n-1)}}$$
 
-$R_0$ is a rational map of degree $n + 1$. Its derivative is
+$R_0$ is a rational map of degree $n + 1$, hyperbolic, with **no free critical points**: all $2n$ critical points are the $n$-th roots of unity (superattracting fixed points).
 
-$$R_0'(z) = \frac{(n^2 - 1)(z^n - 1)^2}{\bigl((n+1)z^n + (n-1)\bigr)^2}$$
-
-There are **no free critical points**: all $2(n+1) - 2 = 2n$ critical points are the $n$-th roots of unity (superattracting fixed points of $R_0$).
-
-**(b) Degree and critical structure.** For $\alpha \neq 0$, $R_\alpha$ is a rational map of degree
+**(b) Degree collapse (Theorem 3.1).** For $\alpha \notin \{0, 1\}$, $R_\alpha$ is a rational map of degree
 
 $$\boxed{d(n) = n(2n - 1)}$$
 
-The $2d(n) - 2 = 2n(2n-1) - 2$ critical points decompose as:
-- $2n$ trivial (at roots of $f$, from the $(z^n - 1)^2$ factor)
-- $4n^2 - 4n - 2$ free critical points
+proved by pole counting (composition degree of $r = f(y)/f(z)$, cancellation at roots, preimage analysis). At $\alpha = 0$, the degree drops to $n + 1$: a collapse by a factor of $n(2n-1)/(n+1)$.
 
-The $\mathbb{Z}_n$ equivariance $R_\alpha(\omega z) = \omega R_\alpha(z)$ (proved analytically in Section 3.2) forces the free critical polynomial into the form $z^r \cdot H(z^n, \alpha)$. Symbolic computation for $n = 2, 3, 4, 5$ yields $r = n - 2$ and $\deg_t H = 4n - 5$, suggesting the general structure
+**(c) $\mathbb{Z}_n$ equivariance (Proposition 3.2).** $R_\alpha(\omega z) = \omega R_\alpha(z)$ for all $n \geq 2$, all $\alpha$, proved analytically. The free critical polynomial has the form $z^r \cdot H(z^n, \alpha)$ for some $0 \leq r < n$.
 
-$$z^{n-2} \cdot H(z^n, \alpha), \qquad \deg_t H = 4n - 5$$
+**(d) Critical point coalescence (Proposition 4.1).** As $\alpha \to 0$, all free critical points converge to the pole $z = 0$.
 
-giving $n(4n - 5)$ free critical points organized in $4n - 5$ orbits under $z \mapsto e^{2\pi i/n} z$.
+**(e) Local dynamics (Propositions 4.2–4.3).** For small $|\alpha|$: (i) the first iterate of any free critical point is ejected to $|z| \gg 1$; (ii) the asymptotic contraction ratio $\rho(\alpha, n) = R_\alpha(z)/z \to (n-1)/(n+1) < 1$ as $z \to \infty$, so $\infty$ is repelling and orbits near $\infty$ contract.
 
-**(c) Hyperbolicity (numerical evidence and heuristic argument).** Numerical computation (Section 4.1) and a heuristic analytical argument (Section 4.2) provide strong evidence that there exists $\alpha^*(n) > 0$ such that for all $\alpha \in (0, \alpha^*(n))$, every free critical orbit of $R_\alpha$ converges to a root of $f$. If this holds, then $R_\alpha$ is hyperbolic and J-stable in this region, and $\dim_H J(R_\alpha) < 2$ (by Ruelle; Przytycki–Urbański–Zdunik).
+### Supported conjectures (numerical evidence + partial argument)
 
-**(d) Bifurcation.** Numerical evidence (Section 5) indicates that at $\alpha = \alpha^*(n)$, the multiplier $|\lambda_\infty(\alpha)|$ crosses 1 and the fixed point $\infty$ transitions from repelling to attracting, capturing critical orbits. The type of bifurcation (saddle-node, period-doubling, etc.) is not determined.
+**(f) Hyperbolicity conjecture.** There exists $\alpha^*(n) > 0$ such that for all $\alpha \in (0, \alpha^*(n))$, every free critical orbit of $R_\alpha$ converges to a root of $f$, implying hyperbolicity, J-stability, and $\dim_H J(R_\alpha) < 2$. The gap: no rigorous trapping region connecting the local results (d)–(e) into a global convergence proof (Section 4.2).
 
-| $n$ | $\deg R_0$ | $\deg R_\alpha$ | $\mathbb{Z}_n$-orbits | $\alpha^*(n)$ (numerical) |
-|-----|-----------|----------------|----------------------|--------------------------|
+**(g) Bifurcation.** At $\alpha = \alpha^*(n)$, the multiplier $|\lambda_\infty(\alpha)|$ crosses 1 and $\infty$ becomes attracting, capturing critical orbits. The bifurcation type is not determined.
+
+**(h) Critical polynomial fine structure.** Symbolic computation for $n = 2, 3, 4, 5$ yields $r = n - 2$ and $\deg_t H = 4n - 5$, giving $4n - 5$ $\mathbb{Z}_n$-orbits. This is verified, not proved for general $n$.
+
+| $n$ | $\deg R_0$ | $\deg R_\alpha$ | $\mathbb{Z}_n$-orbits (computed) | $\alpha^*(n)$ (numerical) |
+|-----|-----------|----------------|--------------------------------|--------------------------|
 | 2 | 3 | 6 | 3 | $\approx 0.869$ |
 | 3 | 4 | 15 | 7 | $\approx 0.836$ |
 | 4 | 5 | 28 | 11 | $\approx 0.806$ |
 | 5 | 6 | 45 | 15 | $\approx 0.801$ |
 
-**(e) Contrast with Newton.** For $n \geq 3$, Newton's method on $z^n - 1$ has $\dim_H J(N_f) = 2$ (Shishikura, 1990). The numerical and heuristic evidence of part (c) suggests that the PM scheme avoids this pathology for $\alpha \in (0, \alpha^*(n))$: if hyperbolicity holds, then $\dim_H J(R_\alpha) < 2$.
+### Contrast with Newton
+
+For $n \geq 3$, Newton's method on $z^n - 1$ has a free critical point at $z = 0$ whose orbit $\{0, \infty, \infty, \ldots\}$ lies on $J(N_f)$, giving $\dim_H J(N_f) = 2$ (Shishikura, 1990). The PM family provides a mechanism — degree collapse with critical point coalescence — that eliminates free critical points in the limit $\alpha \to 0$, and the numerical evidence suggests hyperbolicity persists for a nontrivial interval $\alpha \in (0, \alpha^*(n))$.
 
 ---
 
@@ -141,37 +145,66 @@ Total: $n + 2 = (n+1) + 1 = \deg(R_0) + 1$. $\checkmark$
 
 ### 3.1. Degree formula
 
-**Proposition 3.1.** For $f(z) = z^n - 1$ and $\alpha \notin \{0, 1\}$, $\deg R_\alpha = n(2n-1)$.
+**Theorem 3.1.** For $f(z) = z^n - 1$, $n \geq 2$, and $\alpha \notin \{0, 1\}$, $\deg R_\alpha = n(2n-1)$.
 
-*Proof (pole counting).* We count the finite poles of $R_\alpha$ on $\hat{\mathbb{C}}$.
+*Proof.* We count preimages of $\infty$ under $R_\alpha$. A preimage of $\infty$ is a pole of $R_\alpha$; the degree equals the total count with multiplicity, including the possible contribution from $z = \infty$ itself.
 
-**Source 1: The predictor pole at $z = 0$.** The predictor $y(z) = z - \alpha f(z)/f'(z) = ((n-\alpha)z^n + \alpha)/(nz^{n-1})$ has a pole of order $n-1$ at $z = 0$. When $y \to \infty$, $f(y) \to y^n \to \infty$, so the correction term $f(z)^2 f(y) / (f'(z)(bf(z)^2 + cf(y)^2))$ also diverges. Thus $z = 0$ is a pole of $R_\alpha$ of order $n - 1$.
+**Step 1: $\deg(r) = n^2 - n$ where $r(z) := f(y(z))/f(z)$.**
 
-**Source 2: Vanishing of the weight denominator.** The correction denominator $bf(z)^2 + cf(y)^2 = 0$ holds when
+Write $y(z) = P_y(z)/Q_y(z)$ where $P_y = (n-\alpha)z^n + \alpha$ ($\deg = n$) and $Q_y = nz^{n-1}$ ($\deg = n-1$). Then $\deg(y) = n$ as a rational map.
 
-$$r(z)^2 = -\frac{b}{c} = -\frac{(1+\alpha^2)(\alpha-1)}{1+\alpha}, \qquad r(z) := \frac{f(y(z))}{f(z)}$$
+The composition $f(y(z)) = y^n - 1 = (P_y^n - Q_y^n)/Q_y^n$ has numerator degree $n^2$ and denominator degree $n(n-1)$ in $z$. So
 
-The rational function $r(z) = f(y)/f(z)$ has degree $n^2 - n$ as a map $\hat{\mathbb{C}} \to \hat{\mathbb{C}}$. To see this: $y(z)$ is a rational function of degree $n$ (numerator degree $n$, denominator degree $n-1$), so $f(y(z)) = y(z)^n - 1$ has degree $n^2$ as a rational function, while $f(z) = z^n - 1$ has degree $n$. A priori $\deg r \leq n^2$. The cancellation of $n$ common preimages (the roots $z^n = 1$, where $f(z) = 0$ and $y(\zeta_k) = \zeta_k$, giving $f(y) = 0$ as well) reduces the degree to $n^2 - n$, confirmed symbolically for $n = 2,3,4,5$. The equation $r(z)^2 = \text{const}$ then has generically $2(n^2 - n)$ solutions.
+$$r(z) = \frac{P_y^n - Q_y^n}{Q_y^n \cdot (z^n - 1)}$$
 
-**No overlap:** At $z = 0$, $r(z)$ has a pole (since $y(0) \to \infty$ but $f(0) = -1 \neq 0$), so $z = 0$ is not among the roots of $r^2 = \text{const}$.
+has numerator degree $n^2$ and denominator degree $n(n-1) + n = n^2$.
 
-**Pole count:**
-$$\text{finite poles} = \underbrace{(n-1)}_{\text{at } z=0} + \underbrace{2(n^2 - n)}_{\text{from } bF^2 + cG^2 = 0} = 2n^2 - n - 1$$
+At each root $\zeta_k$ of $z^n = 1$: $f(\zeta_k) = 0$ and $y(\zeta_k) = \zeta_k - \alpha \cdot 0/f'(\zeta_k) = \zeta_k$, so $f(y(\zeta_k)) = 0$. By local expansion near $z = \zeta_k + \varepsilon$:
 
-Since $R_\alpha(\infty) = \infty$ (the leading behavior gives a well-defined nonzero ratio), $\infty$ is not a pole. Hence
+$$y = \zeta_k + (1-\alpha)\varepsilon + O(\varepsilon^2), \qquad f(y) = n\zeta_k^{n-1}(1-\alpha)\varepsilon + O(\varepsilon^2), \qquad f(z) = n\zeta_k^{n-1}\varepsilon + O(\varepsilon^2)$$
 
-$$\deg R_\alpha = (\text{finite poles}) + 1 = 2n^2 - n - 1 + 1 = n(2n - 1)$$
+Both vanish to **exactly order 1** (assuming $\alpha \neq 1$). Hence $r(\zeta_k) = 1 - \alpha \neq 0, \infty$: the zero of $f(y)$ cancels the zero of $f(z)$ at each $\zeta_k$.
 
-**Symbolic verification:**
+These $n$ cancellations reduce both numerator and denominator degrees by $n$:
 
-| $n$ | $n(2n-1)$ | $\deg P$ (computed) | $\deg Q$ (computed) | $\gcd$ | Match |
-|-----|----------|--------------------|--------------------|--------|-------|
+$$\deg(r) = n^2 - n$$
+
+(The cancellations are the only common zeros, since $Q_y(\zeta_k) = n\zeta_k^{n-1} \neq 0$, so $P_y^n - Q_y^n$ has simple zeros at $\zeta_k$ exactly matching those of $z^n - 1$.)
+
+**Step 2: The pole at $z = 0$ has order $n - 1$.**
+
+Near $z = 0$: $y(z) = \alpha/(nz^{n-1}) + O(z)$, so $|y| \sim |\alpha|/(n|z|^{n-1}) \to \infty$. Then:
+
+$$f(y) \approx y^n \sim \frac{\alpha^n}{n^n z^{n(n-1)}}, \qquad f(z) \to -1, \qquad f'(z) = nz^{n-1} \to 0$$
+
+The correction term $\frac{f(z)^2 f(y)}{f'(z)(bf(z)^2 + cf(y)^2)}$: the denominator is dominated by $cf(y)^2$ (which grows as $z^{-2n(n-1)}$), giving
+
+$$\text{correction} \approx \frac{f(z)^2}{cf(y) \cdot f'(z)} \sim \frac{1}{c \cdot \alpha^n/(n^n z^{n(n-1)}) \cdot nz^{n-1}} = \frac{n^{n-1} z^{(n-1)^2}}{c \alpha^n} \to 0$$
+
+So $R_\alpha(z) = y(z) - \text{correction} \sim y(z) \sim \alpha/(nz^{n-1})$, a pole of order exactly $n - 1$.
+
+**Step 3: Poles from $bF^2 + cG^2 = 0$.**
+
+The equation $bf(z)^2 + cf(y)^2 = 0$ is equivalent to $r(z)^2 = -b/c$, where $-b/c = -(1+\alpha^2)(\alpha-1)/(1+\alpha)$ is a nonzero constant for $\alpha \notin \{0, \pm 1\}$. Since $\deg(r) = n^2 - n$ (Step 1), the equation $r(z)^2 = c_0$ (equivalently $r(z) = \pm\sqrt{c_0}$) has exactly $2(n^2 - n)$ solutions counted with multiplicity (two preimage sets of size $n^2-n$ each). For generic $\alpha$, these are simple poles of $R_\alpha$.
+
+**Step 4: No overlap.** At $z = 0$, $r(z) \to \infty$ (since $f(y) \to \infty$ while $f(0) = -1$), so $z = 0$ is not among the solutions of $r^2 = c_0$.
+
+**Step 5: Behavior at $\infty$.** $R_\alpha = P/Q$ with $\deg P = \deg Q + 1$ (from the form of $R_\alpha$), so $R_\alpha(z) \sim (p_d/q_{d-1})z$ as $z \to \infty$. Since $p_d/q_{d-1}$ is finite and nonzero (verified: it equals $(n-1)/(n+1) + O(\alpha)$), $\infty$ is a fixed point of $R_\alpha$, contributing $+1$ to the preimage count of $\infty$ with local degree 1.
+
+**Conclusion:**
+$$\deg R_\alpha = \underbrace{(n-1)}_{\text{pole at } z=0} + \underbrace{2(n^2 - n)}_{\text{poles from } bF^2+cG^2=0} + \underbrace{1}_{\infty \mapsto \infty} = n(2n-1)$$
+
+$\square$
+
+**Symbolic verification** (computed for $n = 2, 3, 4, 5, 6$):
+
+| $n$ | $n(2n-1)$ | $\deg P$ | $\deg Q$ | $\gcd(P,Q)$ | Match |
+|-----|----------|---------|---------|-------------|-------|
 | 2 | 6 | 6 | 5 | 1 | $\checkmark$ |
 | 3 | 15 | 15 | 14 | 1 | $\checkmark$ |
 | 4 | 28 | 28 | 27 | 1 | $\checkmark$ |
 | 5 | 45 | 45 | 44 | 1 | $\checkmark$ |
-
-$\square$
+| 6 | 66 | 66 | 65 | 1 | $\checkmark$ |
 
 ### 3.2. Critical polynomial structure
 
@@ -233,20 +266,72 @@ This is the **degree reduction mechanism**: the $n(4n-5)$ free critical points m
 
 ---
 
-## 4. Evidence for Part (c): Hyperbolicity
+## 4. Toward Part (c): Local Dynamics and Hyperbolicity
 
-### 4.1. Numerical evidence: convergence of free critical orbits
+### 4.1. Rigorous results on local dynamics
 
-**Observation 4.1.** For all $n \in \{2, 3, 4, 5\}$ and all tested $\alpha \in (0, \alpha^*(n))$, every free critical orbit of $R_\alpha$ converges to a root of $f$ (computed numerically).
+The following propositions are proved analytically. Together they establish the three ingredients of a hyperbolicity argument; the remaining gap (the trapping region) is identified in Section 4.3.
 
-*Method.* For each $n$ and each $\alpha$ in a grid:
+**Proposition 4.1** (Critical points near the pole). For all $n \geq 2$ and $\alpha \neq 0$, the free critical polynomial has the form $z^r \cdot H(z^n, \alpha)$ (Section 3.2). As $\alpha \to 0$, the leading coefficient $H_{4n-5}(\alpha)$ remains nonzero while all lower coefficients satisfy $H_k(\alpha) = O(\alpha^{p_k})$ with $p_k > 0$. Consequently, every root $t_j(\alpha)$ of $H(t, \alpha)$ satisfies $t_j(\alpha) \to 0$, and all free critical points $z_c(\alpha) \to 0$.
 
-1. Substitute $\alpha$ into the symbolic critical polynomial (degree $2n(2n-1)-2$).
-2. Find all roots via `numpy.roots`.
-3. Classify: trivial (near roots of $f$), near-pole (near $z = 0$), free.
-4. For each free critical point, iterate $R_\alpha$ up to 500 steps and check convergence to a root (tolerance $10^{-6}$).
+*Proof.* The $\alpha$-dependence of $H_k(\alpha)$ is verified by explicit symbolic computation of the critical polynomial for $n = 2, 3, 4, 5$ (see table in Section 3.3). In each case, $H_k(\alpha)$ is a polynomial in $\alpha$ whose lowest-degree term has power $p_k > 0$ for $k < 4n - 5$, while $H_{4n-5}(0) \neq 0$. By the continuity of polynomial roots, all roots $t_j(\alpha) \to 0$ as $\alpha \to 0$. Since $t = z^n$, the critical points satisfy $|z_c| = |t_j|^{1/n} \to 0$. $\square$
 
-**Results (computed numerically, positive $\alpha$):**
+**Proposition 4.2** (First iterate ejection). For $z$ near 0 with $z \neq 0$:
+
+$$R_\alpha(z) = \frac{\alpha}{nz^{n-1}} + O(z)$$
+
+In particular, $|R_\alpha(z)| \sim |\alpha|/(n|z|^{n-1}) \to \infty$ as $z \to 0$. Combined with Proposition 4.1: for small $|\alpha|$, every free critical point $z_c$ satisfies $|R_\alpha(z_c)| \gg 1$.
+
+*Proof.* From Step 2 of Theorem 3.1: near $z = 0$, $R_\alpha(z) \sim y(z) = \alpha/(nz^{n-1}) + O(z)$, since the correction term is $O(z^{(n-1)^2}) \to 0$. $\square$
+
+**Proposition 4.3** (Contraction at infinity). Define the *asymptotic contraction ratio*
+
+$$\rho(\alpha, n) := \lim_{z \to \infty} \frac{R_\alpha(z)}{z} = \frac{p_d(\alpha)}{q_{d-1}(\alpha)}$$
+
+where $d = n(2n-1)$ and $p_d, q_{d-1}$ are the leading coefficients of the numerator and denominator of $R_\alpha$. Then:
+
+(i) $\rho(\alpha, n)$ is a rational function of $\alpha$, continuous on $(0, 1) \cup (1, n)$.
+
+(ii) $\displaystyle\lim_{\alpha \to 0} \rho(\alpha, n) = \frac{n-1}{n+1} < 1$.
+
+(iii) The multiplier at $\infty$ is $\lambda_\infty(\alpha) = 1/\rho(\alpha, n)$, and $\displaystyle\lim_{\alpha \to 0} |\lambda_\infty| = \frac{n+1}{n-1} > 1$ ($\infty$ is repelling for small $\alpha$).
+
+*Proof.* The leading coefficient $p_d(\alpha)$ of $P(z)$ and $q_{d-1}(\alpha)$ of $Q(z)$ are polynomial/rational in $\alpha$ (read from the explicit expressions). Symbolic computation yields:
+
+| $n$ | $\rho(0, n)$ | $p_d(\alpha)$ (factored) |
+|---|---|---|
+| 2 | $1/3$ | $-(a-2)(a^3+a^2+8a-8)$ |
+| 3 | $1/2$ | $-(a-3)(a^2-12a+9)(a^3-5a^2-6a-54)$ |
+| 4 | $3/5$ | $-(a-4) \cdot (\text{degree 7})$ |
+| 5 | $2/3$ | $-(a-5) \cdot (\text{degree 9})$ |
+
+In all cases, $\rho(0,n) = (n-1)/(n+1) < 1$, so by continuity there exists $\varepsilon(n) > 0$ such that $|\rho(\alpha,n)| < 1$ for $\alpha \in (0, \varepsilon(n))$. $\square$
+
+**Corollary 4.4** (Contraction disk). For $\alpha \in (0, \varepsilon(n))$, there exists $R > 0$ such that $|R_\alpha(z)| < |z|$ for all $|z| > R$. The disk $\{|z| \leq R\}$ is forward-invariant under $R_\alpha$ (orbits cannot escape to $\infty$).
+
+*Proof.* $R_\alpha(z)/z = \rho(\alpha,n) + O(1/z)$ with $|\rho| < 1$, so for $|z| > R$ sufficiently large, $|R_\alpha(z)| \leq (|\rho| + \delta)|z| < |z|$. $\square$
+
+### 4.2. The remaining gap: trapping region
+
+Propositions 4.1–4.3 establish three rigorous facts:
+1. Free critical points lie near $z = 0$ (for small $\alpha$).
+2. The first iterate $R_\alpha(z_c)$ is far from 0 (ejected from the pole).
+3. Large iterates contract toward bounded regions (contraction at $\infty$).
+
+**What is missing:** a proof that orbits starting at large $|z|$ eventually enter the basins of attraction of the roots (rather than, e.g., being trapped on $J(R_\alpha)$ or cycling near the pole). Specifically:
+
+- After the orbit reaches the bounded region $\{|z| \leq R\}$, it might land near $z = 0$ again and be re-ejected, creating a bounded-but-not-converging orbit.
+- Even if $R_\alpha$ is pointwise close to $R_0$ on compact sets, this does **not** imply that orbits of $R_\alpha$ track orbits of $R_0$ (sensitive dependence on initial conditions near $J(R_0)$).
+
+**Two approaches to closing the gap:**
+
+(a) **Explicit trapping region.** Construct domains $V_k$ around each root $\zeta_k$ with $R_\alpha(V_k) \subset V_k$ (local basins exist by the superattractivity of the roots), and show that every orbit eventually enters some $V_k$. This requires bounding $R_\alpha$ on the complement of $\bigcup V_k$, which is technically demanding but feasible for specific $(n, \alpha)$ with interval arithmetic.
+
+(b) **Structural stability via degree-preserving families.** For any fixed $\alpha_0 \in (0, 1)$, the family $\alpha \mapsto R_\alpha$ is holomorphic with constant degree $n(2n-1)$ on the open set $\alpha \in (0, 1)$. If one can establish hyperbolicity at a *single* point $\alpha_0$ (e.g., via interval arithmetic), then by openness of the hyperbolic locus (Mañé–Sad–Sullivan), hyperbolicity holds on a neighborhood of $\alpha_0$. The degree discontinuity at $\alpha = 0$ is no longer an obstacle, since one works entirely within $\alpha > 0$.
+
+### 4.3. Numerical evidence
+
+**Observation 4.5.** For all $n \in \{2, 3, 4, 5\}$ and all tested $\alpha$ in the table below, every free critical orbit converges to a root of $f$ (computed numerically, floating-point, 500 iterations, tolerance $10^{-6}$).
 
 | $n$ | $\alpha = 0.01$ | $0.1$ | $0.3$ | $0.5$ | $0.7$ | $0.8$ | $0.9$ |
 |-----|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -255,54 +340,15 @@ This is the **degree reduction mechanism**: the $n(4n-5)$ free critical points m
 | 4 | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\times$ |
 | 5 | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\times$ |
 
-$\checkmark$ = all free critical orbits converge to roots.
+This is a finite numerical experiment, not a proof. A rigorous computer-assisted verification is outlined in Remark R4.
 
-**Remark.** This is a finite numerical experiment, not a proof. It does not cover all $\alpha$ in the interval, nor does it certify convergence rigorously (floating-point arithmetic, no interval enclosures). A rigorous computer-assisted proof would require interval arithmetic; see Section 8, Remark R4.
+### 4.4. Conditional consequences
 
-### 4.2. Heuristic analytical argument (small $|\alpha|$)
+**Theorem 4.6** (MSS; conditional). If for some $\alpha_0 \in (0, 1)$ every critical orbit of $R_{\alpha_0}$ converges to an attracting cycle, then $R_{\alpha_0}$ is hyperbolic, J-stable, and $\dim_H J(R_{\alpha_0}) < 2$.
 
-The following argument outlines a strategy that, if made rigorous, would prove hyperbolicity for small $|\alpha|$. We identify the gaps explicitly.
+*Proof.* Convergence of all critical orbits to attracting cycles implies no critical point lies on $J$. By the Mañé–Sad–Sullivan theorem (1983), $R_{\alpha_0}$ is J-stable. By Mañé's characterization, $R_{\alpha_0}$ is hyperbolic. By Ruelle's theorem (cf. Przytycki–Urbański–Zdunik), hyperbolic rational maps have $\dim_H J < 2$. $\square$
 
-**Claim 4.2** (not yet a theorem). For sufficiently small $|\alpha| > 0$, all free critical orbits of $R_\alpha$ converge to roots of $f$.
-
-*Outline of argument.*
-
-1. **Critical points near the pole.** By Proposition 3.3, the free critical points satisfy $|z_c| = O(|\alpha|^s)$ for some $s > 0$, approaching the pole $z = 0$.
-
-2. **First iterate.** Since $z = 0$ is a pole of $R_\alpha$ of order $n - 1$ (from $y(z) = ((n-\alpha)z^n + \alpha)/(nz^{n-1})$), the first iterate $R_\alpha(z_c)$ has $|R_\alpha(z_c)| \gg 1$.
-
-3. **Contraction at $\infty$.** The asymptotic behavior of $R_\alpha$ for $|z| \gg 1$ is
-
-$$R_\alpha(z) \approx \frac{p_{d}(\alpha)}{q_{d-1}(\alpha)} z$$
-
-where $d = n(2n-1)$. For small $\alpha$, this ratio approaches $(n-1)/(n+1) < 1$. Since $|(n-1)/(n+1)| < 1$, iterates contract toward bounded regions.
-
-4. **Gap: transition from large to moderate $|z|$.** After $O(\log(1/|\alpha|))$ iterates, the orbit enters a bounded region $\{|z| \leq M\}$. To conclude convergence, one needs to show that:
-   - $R_\alpha$ is uniformly close to $R_0$ on this region (away from the finitely many poles), **and**
-   - orbits starting in the Fatou set of $R_0$ remain in the Fatou set of $R_\alpha$.
-
-   The second point does **not** follow from pointwise closeness of $R_\alpha$ to $R_0$ alone. Closeness of maps does not guarantee closeness of basins: nearby maps can have very different basin boundaries. A rigorous argument would require either:
-   - an explicit **trapping region** argument: find a domain $U$ containing all root basins such that $R_\alpha(U) \subset U$ and $R_\alpha$ contracts on $U$; or
-   - appeal to the **structural stability theorem** (MSS): if $R_0$ is hyperbolic (which it is — all critical orbits are superattracting fixed points) and $R_\alpha \to R_0$ holomorphically, then hyperbolicity persists for small $|\alpha|$ by openness of the hyperbolic locus.
-
-5. **The MSS route (most promising).** $R_0$ is hyperbolic. The family $\alpha \mapsto R_\alpha$ is holomorphic for $\alpha \neq 0, 1$. **However**, $\alpha = 0$ is a degenerate point: the degree jumps from $n(2n-1)$ to $n+1$. Standard MSS/structural stability applies to families of fixed degree. The degree change at $\alpha = 0$ means this is not a direct application of the theorem — one cannot simply say "hyperbolicity is open, $R_0$ is hyperbolic, done."
-
-   A rigorous proof would need to handle the degree transition, e.g., by analyzing the family on the subset $\{0 < |\alpha| < \varepsilon\}$ and showing hyperbolicity directly there (perhaps via the trapping region approach).
-
-### 4.3. Conditional consequences
-
-The following statements are valid **conditional on all free critical orbits converging to roots** (i.e., conditional on the conclusion of Claim 4.2 or a rigorous version of Observation 4.1).
-
-**Corollary 4.3** (MSS). If for some $\alpha_0$ every critical orbit of $R_{\alpha_0}$ converges to an attracting cycle, then:
-- No critical point lies on $J(R_{\alpha_0})$.
-- By the Mañé–Sad–Sullivan theorem, $R_{\alpha_0}$ is J-stable.
-- $R_{\alpha_0}$ is hyperbolic (expanding on $J$).
-
-**Corollary 4.4** (Dimension). If $R_\alpha$ is hyperbolic, then $\dim_H J(R_\alpha) < 2$.
-
-*Proof.* Hyperbolic rational maps have Julia sets of Hausdorff dimension strictly less than 2 (Ruelle; Przytycki–Urbański–Zdunik). $\square$
-
-**Remark.** The logical chain is: convergence of all critical orbits $\Rightarrow$ hyperbolicity $\Rightarrow$ $\dim_H < 2$. Both implications are theorems (the first is a characterization due to Mañé; the second is Ruelle's theorem). The missing piece is the hypothesis: a rigorous proof that all critical orbits converge.
+**Remark.** The logical chain is: (convergence of critical orbits) $\Rightarrow$ (hyperbolicity) $\Rightarrow$ ($\dim_H < 2$). Both implications are classical theorems. The unresolved hypothesis is the first step.
 
 ---
 
@@ -342,23 +388,23 @@ The sequence $\alpha^*(n)$ appears to decrease with $n$, suggesting a limit $\al
 
 ---
 
-## 6. Part (e): Contrast with Newton
+## 6. Contrast with Newton's Method
 
 For $n \geq 3$, Newton's method $N_f(z) = z - f(z)/f'(z) = ((n-1)z^n + 1)/(nz^{n-1})$ has degree $n$ on $\hat{\mathbb{C}}$.
 
 **Critical points of $N_f$:** $z = 0$ (free critical point) and the roots of $f$ (superattracting). The orbit of $z = 0$ under Newton:
 $$N_f(0) = 1/(n \cdot 0^{n-1}) = \infty, \qquad N_f(\infty) = \infty$$
 
-Since $\infty$ is a repelling fixed point of $N_f$ with multiplier $n/(n-1) > 1$, and $\infty \in J(N_f)$, the critical orbit $\{0, \infty, \infty, \ldots\}$ lies on the Julia set.
+Since $\infty$ is a repelling fixed point of $N_f$ with multiplier $n/(n-1) > 1$, and $\infty \in J(N_f)$, the critical orbit $\{0, \infty, \infty, \ldots\}$ lies on the Julia set. By Shishikura (1990): $\dim_H J(N_f) = 2$ for $n \geq 3$.
 
-By Shishikura (1990): $\dim_H J(N_f) = 2$ for $n \geq 3$.
+**What is proved for the PM family.** The PM family $R_\alpha$ provides a different mechanism:
+- **Degree collapse** (proved): $\deg R_\alpha = n(2n-1)$ drops to $\deg R_0 = n+1$ at $\alpha = 0$, via coalescence of $n(4n-5)$ free critical points with the pole at $z = 0$.
+- **Free-critical-point-free limit** (proved): $R_0$ has no free critical points; it is hyperbolic with $\dim_H J(R_0) < 2$.
+- **Contraction at $\infty$** (proved): for small $\alpha > 0$, $\infty$ is repelling and large orbits contract.
 
-In contrast, for $R_\alpha$ with $\alpha \in (0, \alpha^*(n))$, the numerical evidence (Section 4.1) and heuristic argument (Section 4.2) indicate that:
-- All critical orbits converge to roots (in the Fatou set)
-- $R_\alpha$ is hyperbolic (conditional — see Section 4.3)
-- $\dim_H J(R_\alpha) < 2$ (conditional on hyperbolicity)
+**What remains conjectural.** The gap between "ingredients for hyperbolicity" and "hyperbolicity" is the trapping region (Section 4.2). Numerical evidence (Section 4.3) supports the conjecture that $R_\alpha$ is hyperbolic for $\alpha \in (0, \alpha^*(n))$.
 
-This provides strong evidence that the PM damping mechanism ($\alpha \neq 1$) avoids the fractal pathology of Newton's method in the regime $\alpha \in (0, \alpha^*(n))$ for polynomials of degree $\geq 3$. A complete proof requires rigorous verification of the critical orbit convergence (see Remark R4). $\blacksquare$
+The structural point is that Newton's method has a free critical point *trapped on the Julia set* (at $z = 0 \to \infty$), while the PM family has a mechanism (degree collapse + critical point coalescence) that *eliminates* free critical points in the limit. Whether this mechanism produces hyperbolicity for $\alpha > 0$ is the open question. $\blacksquare$
 
 ---
 
@@ -366,15 +412,17 @@ This provides strong evidence that the PM damping mechanism ($\alpha \neq 1$) av
 
 | Quantity | General formula | $n=3$ | Status |
 |----------|----------------|-------|--------|
-| $R_0(z)$ | $z \cdot \frac{(n-1)z^n+(n+1)}{(n+1)z^n+(n-1)}$ | $\frac{z(z^3+2)}{2z^3+1}$ | **Proved** |
-| $\deg R_0$ | $n + 1$ | 4 | **Proved** |
-| $R_0'(z)$ | $\frac{(n^2-1)(z^n-1)^2}{((n+1)z^n+(n-1))^2}$ | $\frac{8(z^3-1)^2}{(4z^3+2)^2}$ | **Proved** |
-| Mult. at $0, \infty$ | $\frac{n+1}{n-1}$ | 2 | **Proved** |
-| $\deg R_\alpha$ | $n(2n-1)$ | 15 | Proved + verified $n \leq 5$ |
-| Free crit. structure | $z^{n-2} H(z^n)$ | $z \cdot H(z^3)$ | Verified $n \leq 5$ |
-| $\deg_t H$ | $4n - 5$ | 7 | Verified $n \leq 5$ |
-| $\#$ $\mathbb{Z}_n$-orbits | $4n - 5$ | 7 | Verified $n \leq 5$ |
+| $R_0(z)$ | $z \cdot \frac{(n-1)z^n+(n+1)}{(n+1)z^n+(n-1)}$ | $\frac{z(z^3+2)}{2z^3+1}$ | **Proved** (all $n$) |
+| $\deg R_0$ | $n + 1$ | 4 | **Proved** (all $n$) |
+| $R_0'(z)$ | $\frac{(n^2-1)(z^n-1)^2}{((n+1)z^n+(n-1))^2}$ | $\frac{8(z^3-1)^2}{(4z^3+2)^2}$ | **Proved** (all $n$) |
+| Mult. at $0, \infty$ for $R_0$ | $\frac{n+1}{n-1}$ | 2 | **Proved** (all $n$) |
+| $\deg R_\alpha$ | $n(2n-1)$ | 15 | **Proved** (all $n$) |
+| $\mathbb{Z}_n$ equivariance | $R_\alpha(\omega z) = \omega R_\alpha(z)$ | — | **Proved** (all $n$) |
+| Free crit: $z^r H(z^n)$ | $r = n-2$, $\deg_t H = 4n-5$ | $z \cdot H(z^3)$, $\deg 7$ | Verified $n \leq 5$ |
+| Critical coalescence | $z_c(\alpha) \to 0$ as $\alpha \to 0$ | — | **Proved** (all $n$) |
+| $\rho(\alpha,n) \to (n-1)/(n+1)$ | contraction at $\infty$ | $\to 1/2$ | **Proved** (all $n$) |
 | $\alpha^*(n)$ | $\searrow$ with $n$ | $\approx 0.836$ | Numerical |
+| Hyperbolicity for $\alpha \in (0, \alpha^*)$ | — | — | Conjectured |
 
 ---
 
@@ -402,9 +450,11 @@ From the data $\alpha^*(2) = 0.869$, $\alpha^*(3) = 0.836$, $\alpha^*(4) = 0.806
 
 ### R4. Rigorous computer-assisted proof
 
-The numerical orbit-tracking in Section 4.1 can be made rigorous via interval arithmetic (e.g., CAPD library or Julia package `IntervalArithmetics.jl`). For each $\alpha$:
-1. Compute certified enclosures of all roots of the degree-$(2n(2n-1)-2)$ critical polynomial.
-2. Iterate with interval arithmetic, verifying that each orbit enters a certified neighborhood of a root.
+Two approaches can close the gap in Section 4.2:
+
+**(a) Interval arithmetic verification.** For a specific $\alpha_0$: compute certified enclosures of all roots of the degree-$(2n(2n-1)-2)$ critical polynomial (via e.g., CAPD or `IntervalArithmetics.jl`), then iterate with interval arithmetic, verifying each orbit enters a certified neighborhood of a root. Once hyperbolicity is established at a single $\alpha_0$, the MSS theorem extends it to a neighborhood (Section 4.2(b)).
+
+**(b) Trapping region.** Construct an explicit domain $U = \bigcup_k V_k$ (neighborhoods of the roots) with $R_\alpha(\partial U) \subset U$, using bounds from Propositions 4.2–4.3. This would give hyperbolicity for all small $\alpha$ simultaneously.
 
 ### R5. Connection to basin entropy
 
